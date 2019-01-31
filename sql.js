@@ -1,6 +1,4 @@
 ﻿
-    //kc march22 2010
-
 var db = openDatabase("Becel recipes", "1.0", "Becel recipes", 5 * 1024);
 db.transaction(function(tx) {
     tx.executeSql("CREATE TABLE IF NOT EXISTS [tbl_Recipe] (recipe_id integer PRIMARY KEY  NOT NULL,category_id integer NOT NULL,recipe_title varchar(100) COLLATE NOCASE,recipe_description varchar(100) COLLATE NOCASE,main_image varchar(100) COLLATE NOCASE,instruction varchar(100) COLLATE NOCASE,lang_code varchar(100) COLLATE NOCASE,tips varchar(100) COLLATE NOCASE,benefit_text varchar(100) COLLATE NOCASE,makes_qty integer,CreateDate datetime DEFAULT (CURRENT_TIMESTAMP));");
@@ -9,10 +7,8 @@ db.transaction(function(tx) {
 
     tx.executeSql("CREATE INDEX IF NOT EXISTS idx_RecIng ON tbl_ingredient (recipe_id)");
 });
- 
 
-
-    function getRecipeList(elem_container, CategoryID) {
+function getRecipeList(elem_container, CategoryID) {
 
 
         db.transaction(
@@ -31,7 +27,7 @@ db.transaction(function(tx) {
             }
         )};
 
-            function sqlSearchRecipes(elem_container, searchStr) {
+function sqlSearchRecipes(elem_container, searchStr) {
 
                 searchStr = "%" + searchStr + "%";
                 db.transaction(
@@ -50,7 +46,7 @@ db.transaction(function(tx) {
             )
             };
 
-            function getCategoryNameByID(catid) {
+function getCategoryNameByID(catid) {
 
                 if (catid == 33) {
                     return "Soups, Salads, and Appetizers";
@@ -79,8 +75,7 @@ db.transaction(function(tx) {
             
             };
 
-
-            function getRecipeDetails(recipeId) {
+function getRecipeDetails(recipeId) {
                 db.transaction(
                     function(tx) {
                         tx.executeSql("SELECT * FROM tbl_Ingredient WHERE recipe_Id=? order by sort_order; ", [recipeId],
