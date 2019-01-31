@@ -1,0 +1,302 @@
+﻿
+<%@ Page Language="C#" AutoEventWireup="true"  CodeFile="Default.aspx.cs" Inherits="_DefaultMobile" %>
+<!DOCTYPE html>
+<!-- <html> -->
+<html manifest="cache.manifest">
+<head>
+<meta charset=utf-8 />
+    <title>Becel iPhone recipes</title>
+        <script type="text/javascript">
+
+            var dynamicRecipe;
+        </script>
+        
+        <style type="text/css" media="screen">@import "jqtouch.css";</style>
+        <style type="text/css" media="screen">@import "beceltheme.css";</style>
+        <script src="jquery.1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="sql.js" type="text/javascript" charset="utf-8"></script>
+        <!-- 
+		<script src="DataLoader.js" type="text/javascript" charset="utf-8"></script>
+        -->
+        <script src="jqtouch.js" type="text/javascript"></script>
+        <script src="jqt.location.js" type="text/javascript"></script>
+        <script type="text/javascript" charset="utf-8">
+	
+            var jQT = new $.jQTouch({
+                icon: 'jqtouch.png',
+                addGlossToIcon: false,
+                slideSelector: 'body > * > div ul li a , body > * > ul li a , .forceSlide , body > * > div div a',
+                startupScreen: 'jqt_startup.png',
+                statusBar: 'black',
+                preloadImages: [
+                    'img/back_button.png',
+                    'img/back_button_clicked.png',
+                    'img/button_clicked.png',
+                    'img/grayButton.png',
+                    'img/whiteButton.png',
+                    'img/loading.gif'
+                    ]
+            });
+            // Some sample Javascript functions:
+
+
+            $('#servicesDesign').bind("swipe", function(event, data) {
+                alert(data.direction);
+            });
+
+            $(function() {
+                // Show a swipe event on swipe test
+                //            $('#servicesDesign').swipe(function(evt, data) {                
+                //                    $(this).html('You swiped <strong>' + data.direction + '</strong>!');
+                //                });
+                $('a[target="_blank"]').click(function() {
+                    if (confirm('This link opens in a new window.')) {
+                        return true;
+                    } else {
+                        $(this).removeClass('active');
+                        return false;
+                    }
+                });
+                // Page animation callback events
+                $('#pageevents').
+                    bind('pageAnimationStart', function(e, info) {
+                        $(this).find('.info').append('Started animating ' + info.direction + '&hellip; ');
+                    }).
+                    bind('pageAnimationEnd', function(e, info) {
+                        $(this).find('.info').append(' finished animating ' + info.direction + '.<br /><br />');
+                    });
+                // Page animations end with AJAX callback event, example 1 (load remote HTML only first time)
+                $('#callback').bind('pageAnimationEnd', function(e, info) {
+                    if (!$(this).data('loaded')) {                      // Make sure the data hasn't already been loaded (we'll set 'loaded' to true a couple lines further down)
+                        $(this).append($('<div>Loading</div>').         // Append a placeholder in case the remote HTML takes its sweet time making it back
+                            load('ajax.html .info', function() {        // Overwrite the "Loading" placeholder text with the remote HTML
+                                $(this).parent().data('loaded', true);  // Set the 'loaded' var to true so we know not to re-load the HTML next time the #callback div animation ends
+                            }));
+                    }
+                });
+                // Orientation callback event
+                $('body').bind('turn', function(e, data) {
+                    $('#orient').html('Orientation: ' + data.orientation);
+                });
+            });
+
+
+
+            $(document).ready(function(e) {
+
+                $('#home').bind('pageAnimationEnd', function(event, info) {
+                    if (info.direction == 'in') {
+                        try {
+                            dynamicRecipe = "aa";
+                            $("#hdnSearch").val("");
+                        }
+                        catch (err) {
+                            console.debug(err.message);
+                        }
+                    }
+                })
+
+                $('#RecipeList').bind('pageAnimationEnd', function(event, info) {
+                    //alert(dynamicRecipe);
+                    if (info.direction == 'in' && isNaN(dynamicRecipe)) {
+                        try {
+                            if ($("#hdnSearch").val() == "") {
+                                getRecipeList('searchResults', getIDFromClassString("category_"));
+                            }
+                            else {
+                                sqlSearchRecipes('searchResults', $("#hdnSearch").val());
+                                $("#hdnSearch").val("");
+                            }
+                            //dynamicRecipe = "";
+                        }
+                        catch (err) {
+                            console.debug(err.message);
+                        }
+                    }
+                })
+
+
+                $('#RecipeView').bind('pageAnimationEnd', function(event, info) {
+
+                    if (info.direction == 'in') {
+
+                        try {
+                            getRecipeDetails(getRecipeIDFromClassString());
+                        }
+                        catch (err) {
+                            console.debug(err.message);
+                        }
+
+                        //alert(getRecipeIDFromClassString());
+                    }
+                })
+
+            });
+
+
+            function getRecipeIDFromClassString() {
+                return getIDFromClassString("dynamicRecipe_");
+            }
+            function getIDFromClassString(prefix) {
+                //i.e classnamde dynamicLocation_77 anotherclassname
+                var classstring = dynamicRecipe;
+                //alert(classstring);
+                if (!isNaN(classstring)) {
+                    return classstring;
+                }
+
+                var part1 = classstring.split(prefix)[1]
+                //77 anotherclassname
+                if (isNaN(part1)) {
+                    return part1.split(" ")[0];
+                }
+                else {
+                    return part1;
+                }
+
+            }
+
+            function searchRecipes() {
+                $("#hdnSearch").val($("#txtSearch").val());
+                jQT.goTo("#RecipeList", "slideup");
+            }
+
+        </script>   
+        
+        
+        <style type="text/css" media="screen">
+            body.fullscreen #home .info {
+                display: none;
+            }
+        </style>  
+    
+</head>
+<body>
+
+        <div id="home" class="current">
+            <div class="toolbar">
+                <div class="MainTitle">Becel Recipes</div>
+            </div>
+            
+            <div class="toolbarSearch">
+                <div class="searchBoxContainer">
+                    <div class="searchBoxIcon"></div>
+                    <div class="searchBoxInput"><input type="text" id="txtSearch" onblur="searchRecipes();" />
+                        <input type="hidden" id="hdnSearch" />
+                    </div>
+                    <div class="searchBoxClear"></div>
+                </div>
+            </div>        
+            
+            <div class="hometextBlock" style="clear:both;">
+
+                 <p style="margin-top:7px; margin-bottom:7px;">Start by choosing the type of Heart healthy recipe</p>
+
+                <br /><br />
+                Browse our collection of recipes by type.
+                <ul class="rounded">
+                    <li class="arrow"><a href="#RecipeList" class="category_33">Soups, Salads, and Appetizers<small class="counter">24</small></a></li>
+                    <li class="arrow"><a href="#RecipeList" class="category_32">Vegetables and Side Dishes<small class="counter">15</small></a></li>
+                    <li class="arrow"><a href="#RecipeList" class="category_34">Meat and Poultry<small class="counter">26</small></a></li>
+                    <li class="arrow"><a href="#RecipeList" class="category_39">Fish and Seafood<small class="counter">7</small></a></li>
+                    <li class="arrow"><a href="#RecipeList" class="category_40">Beans and Meatless Mains<small class="counter">6</small></a></li>
+                    <li class="arrow"><a href="#RecipeList" class="category_41">Pasta and Grains<small class="counter">10</small></a></li>
+                    <li class="arrow"><a href="#RecipeList" class="category_38">Baking and Fruit Desserts<small class="counter">43</small></a></li>
+                    <!--<li class="arrow"><a href="#sqlDebug">SQL debug</a></li>
+                    <li class="arrow"><a href="#RecipeView">RecipeView</a></li>-->
+                </ul>
+                
+
+
+                
+                <!--
+                <div id="searchResults">
+                    
+                    <div class="resultItem">
+                        <div class="resultItemImage"></div>
+                        <div class="resultItemText">
+                            <span class="resultCat">Soups, salds and appetizers</span>
+                            <span class="resultTitle">The recipe title</span>
+                        </div>
+                    </div>
+                    
+                   <div class="resultItem">
+                        <div class="resultItemImage"></div>
+                        <div class="resultItemText">
+                            <span class="resultCat">Vegetables and Side Dishes</span>
+                            <span class="resultTitle">The recipe title</span>
+                            <div class="rating"></div>
+                        </div>
+                        <div class="rating"></div>
+                    </div>
+                    
+                    <div class="resultItem">
+                        <div class="resultItemImage"></div>
+                        <div class="resultItemText">
+                            <span class="resultCat">Vegetables and Side Dishes</span>
+                            <span class="resultTitle">The recipe title</span>
+                        </div>
+                    </div>
+                
+                </div>
+                -->
+                
+                
+                <div class="shareThis"></div>
+            </div>
+        </div>
+        
+        
+ 
+         <div id ="RecipeList" class="selectable">
+            <div class="toolbar">
+                <a class="back" id="A3" href="#">Back</a>
+                <div class="MainTitle">Becel Recipes</div>
+            </div>
+            <div id="searchResults" class="rounded" ></div>
+            <!--<ul class="rounded" id="searchResults">           
+            </ul>-->
+        </div>   
+
+        <div id="RecipeView" class="selectable">
+            <div class="toolbar">
+                <a class="back" id="A2" href="#">Back</a>
+                <div class="MainTitle">Becel Recipes</div>
+            </div>
+            <div id="recipeView" class="hometextBlock">
+                <div id="recipeTitle"></div>
+                <div class="recipeImage">
+                    <div id="RecipeImagePlaceHolder" class="recImageContainer"></div>
+                    <div class="recImageFacts">
+                        
+                        <span class="RecipeLabel">Prepare:</span> 10 Mins<br />
+                        <span class="RecipeLabel">Cooking:</span> 15 Mins<br />
+                        <span class="RecipeLabel">Makes:</span> <span id="RecipeMakes"></span><br />
+                    
+                    </div>
+                </div>
+                Ingredients:
+                <div id="recipeIngredients"></div>
+                <br /><br />
+                Instrunctions:
+                <div id="recipeInstruction"></div>
+                <br /><br />
+                Tips:<br />
+                <div id="recipeTips"></div>
+            </div>
+            
+        </div>
+
+        <div id ="sqlDebug" class="selectable">
+            <div class="toolbar">
+                <a class="back" id="A1" href="#">Back</a>
+                <div class="MainTitle">Becel Recipes</div>
+            </div>
+            <input type ="button" onclick="resetData();" value="RESET DATA" style="width:100px; height:60px;"/>
+        
+        </div>
+    
+</body>
+</html>
+
