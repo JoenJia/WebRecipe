@@ -9,7 +9,9 @@ namespace RecipeService.Models
     {
         protected override void Seed(ModelRecipe context)
         {
-            var sqlFile = HttpContext.Current.Server.MapPath("~/App_Data/TestRecipeImages.sql");
+            var sqlFile = HttpContext.Current.Server.MapPath("~/App_Data/TestCategory.sql");
+            context.Database.ExecuteSqlCommand(System.IO.File.ReadAllText(sqlFile));
+            sqlFile = HttpContext.Current.Server.MapPath("~/App_Data/TestRecipeImages.sql");
             context.Database.ExecuteSqlCommand(System.IO.File.ReadAllText(sqlFile));
             sqlFile = HttpContext.Current.Server.MapPath("~/App_Data/TestRecipe.sql");
             context.Database.ExecuteSqlCommand(System.IO.File.ReadAllText(sqlFile));

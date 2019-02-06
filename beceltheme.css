@@ -40,7 +40,7 @@ h1, h2 {
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #COCOCO;
+    color: #C0C0C0;
     
 }
 body.landscape .toolbar > h1 {
@@ -136,12 +136,12 @@ top:-3px;
     border-width: 0 5px;
 }
 .back {
-   left: 6px;
+    left: 6px;
     right: auto;
-    padding: 0;
+    padding: 0px 5px 0px 10px;
     max-width: 55px;
     border-width: 0 8px 0 14px;
-    -webkit-border-image: url(img/back_button.png) 0 8 0 14; 
+    -webkit-border-image: url(img/back_button.png) 0 0 0 1;
 }
 .back.active {
     color: #aaa;
@@ -540,9 +540,16 @@ font-size:10px;
 
 
 }
-#recipeTitle{ overflow:hidden;  border:0px solid blue; font-size:large; text-align:center}
-#recipeIngredients {width:99%; float:left;}
-#recipeInstruction {display:inline;}
+#recipeTitle{ overflow:hidden;  border:0px solid blue; font-size:large; text-align:center; margin:2px;}
+#recipeIngredients {
+    width: 99%;
+    float: left;
+    margin: 2px;
+}
+#recipeInstruction {
+    display: inline;
+    margin: 2px;
+}
 #recipeInstruction li {margin-left:15px;}
 .locationResultsTitle{display:inline; overflow:hidden; float:left; width:69%; border:0px solid blue;}
 
@@ -755,10 +762,10 @@ height:25px;
 {
 	display:inline;
 	float:left;
-	width:225px;
-	height:30px;
+	width:290px;
+	height:35px;
 	border:0px solid #efefef;	
-	margin-top:15px;
+	margin-top:8px;
 	 overflow:hidden;
 	margin-left:5px;
 	margin-right:5px;
@@ -793,7 +800,9 @@ height:25px;
 color:#606060;	
 }
 
-
+.ingredient_table tr td {
+    padding:1px 2px 1px 2px;
+}
 
 
 

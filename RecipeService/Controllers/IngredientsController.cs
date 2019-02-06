@@ -17,11 +17,11 @@ namespace RecipeService.Controllers
             }
         }
 
-        public Models.Ingredient Get(int id)
+        public IEnumerable<Models.Ingredient> Get(int id)
         {
             using (var db = new Models.ModelRecipe())
             {
-                return db.Ingredients.Where(x => x.recipe_id == id).FirstOrDefault();
+                return db.Ingredients.Where(x => x.recipe_id == id).ToList();
             }
         }
 

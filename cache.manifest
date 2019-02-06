@@ -1,10 +1,12 @@
 ﻿CACHE MANIFEST
-# Rev 30
-
+# 2019-02-04 Rev 1
+CACHE:
 index.html
 jqt.location.js
 jqtouch.transitions.js
 jquery.1.3.2.min.js
+dataSql.js
+initialize.js
 sql.js
 jqtouch.js
 jqtouch.css
@@ -21,3 +23,6 @@ img/share.png
 img/search_icon.gif
 img/cancel.gif
 img/stars.gif
+
+NETWORK:
+*

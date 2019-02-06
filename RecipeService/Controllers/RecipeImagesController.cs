@@ -7,29 +7,21 @@ using System.Web.Http;
 
 namespace RecipeService.Controllers
 {
-    public class RecipesController : ApiController
+    public class RecipeImagesController : ApiController
     {
-        // GET api/values
-        public IEnumerable<Models.Recipe> Get()
+        public IEnumerable<Models.RecipeImage> Get()
         {
             using (var db = new Models.ModelRecipe())
             {
-                return db.Recipes.ToList();
-            }
-        }
-        public IEnumerable<Models.Recipe> GetLatest(DateTime refreshTime)
-        {
-            using (var db = new Models.ModelRecipe())
-            {
-                return db.Recipes.Where(x => x.last_updated >= refreshTime).ToList();
+                return db.RecipeImages.ToList();
             }
         }
 
-        public Models.Recipe Get(int id)
+        public Models.RecipeImage Get(string id)
         {
             using (var db = new Models.ModelRecipe())
             {
-                return db.Recipes.Where(x => x.recipe_id == id).FirstOrDefault();
+                return db.RecipeImages.Where(x => x.image_name == id).FirstOrDefault();
             }
         }
 

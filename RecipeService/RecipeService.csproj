@@ -136,6 +136,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BrowserJsonFormatter.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -169,21 +170,28 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RecipeImagesController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\RecipesController.cs" />
+    <Compile Include="Controllers\IngredientsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\ModelRecipe.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\RecipeDBInitializer.cs" />
     <Compile Include="Models\RecipeImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\TestRecipe2.sql" />
     <Content Include="App_Data\TestRecipe.sql" />
+    <Content Include="App_Data\TestCategory.sql" />
     <Content Include="App_Data\TestRecipeImages.sql" />
+    <Content Include="App_Data\TestRecipeIngredient2.sql" />
     <Content Include="App_Data\TestRecipeIngredient.sql" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
