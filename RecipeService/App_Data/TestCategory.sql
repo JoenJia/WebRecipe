@@ -15,4 +15,6 @@
   INSERT INTO [Category] (category_id, category_name) VALUES (47,'') 
   INSERT INTO [Category] (category_id, category_name) VALUES (48,'') 
   INSERT INTO [Category] (category_id, category_name) VALUES (49,'') 
+  INSERT INTO [Category] (category_id, category_name) VALUES (50,'') 
+  INSERT INTO [Category] (category_id, category_name) VALUES (51,'') 
 

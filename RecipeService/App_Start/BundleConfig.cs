@@ -22,6 +22,17 @@ namespace RecipeService
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            //Angular Bundles
+            bundles.Add(new ScriptBundle("~/bundles/Angular")
+    .Include(
+    "~/NGbundle/runtime.*",
+    "~/NGbundle/polyfills.*",
+    "~/NGbundle/styles.*",
+    "~/NGbundle/vendor.*",
+    "~/NGbundle/main.*"));
+            bundles.Add(new StyleBundle("~/Content/NGStyles")
+            .Include("~/NGbundle/styles.*"));
         }
     }
 }

@@ -3,28 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebRecipe", "..\WebRecipe", "{4CC72B81-7B44-4BB5-AD88-81A2256986C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeService", "RecipeService\RecipeService.csproj", "{74680FBA-530F-40E2-9CFC-94D9FA8DB1A7}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "client", "RecipeService\client", "{C737ECFF-4358-4F4F-BA13-7D62CB5DC7AC}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_24540"
-		Debug.AspNetCompiler.PhysicalPath = "..\WebRecipe\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24540\"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_6065"
+		Debug.AspNetCompiler.PhysicalPath = "RecipeService\client\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_6065\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_24540"
-		Release.AspNetCompiler.PhysicalPath = "..\WebRecipe\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_24540\"
+		Release.AspNetCompiler.VirtualPath = "/localhost_6065"
+		Release.AspNetCompiler.PhysicalPath = "RecipeService\client\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_6065\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "24540"
-		SlnRelativePath = "..\WebRecipe\"
+		VWDPort = "6065"
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeService", "RecipeService\RecipeService.csproj", "{7E1108DC-E082-4567-BDC8-4895267F92E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,14 +31,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4CC72B81-7B44-4BB5-AD88-81A2256986C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CC72B81-7B44-4BB5-AD88-81A2256986C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CC72B81-7B44-4BB5-AD88-81A2256986C7}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CC72B81-7B44-4BB5-AD88-81A2256986C7}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{7E1108DC-E082-4567-BDC8-4895267F92E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E1108DC-E082-4567-BDC8-4895267F92E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E1108DC-E082-4567-BDC8-4895267F92E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E1108DC-E082-4567-BDC8-4895267F92E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74680FBA-530F-40E2-9CFC-94D9FA8DB1A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74680FBA-530F-40E2-9CFC-94D9FA8DB1A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74680FBA-530F-40E2-9CFC-94D9FA8DB1A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74680FBA-530F-40E2-9CFC-94D9FA8DB1A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C737ECFF-4358-4F4F-BA13-7D62CB5DC7AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C737ECFF-4358-4F4F-BA13-7D62CB5DC7AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C737ECFF-4358-4F4F-BA13-7D62CB5DC7AC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{C737ECFF-4358-4F4F-BA13-7D62CB5DC7AC}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

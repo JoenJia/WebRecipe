@@ -16,6 +16,19 @@ namespace RecipeService.Controllers
                 return db.Ingredients.ToList();
             }
         }
+        [HttpGet]
+        public IEnumerable<Models.Ingredient> GetLatest(DateTime refreshTime)
+        {
+            refreshTime = refreshTime.AddSeconds(1);
+            using (var db = new Models.ModelRecipe())
+            {
+                return (from r in db.Recipes
+                        join i in db.Ingredients
+                        on r.recipe_id equals i.recipe_id
+                        where r.last_updated >= refreshTime
+                        select i).ToList();
+            }
+        }
 
         public IEnumerable<Models.Ingredient> Get(int id)
         {

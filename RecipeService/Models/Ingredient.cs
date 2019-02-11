@@ -9,7 +9,7 @@ namespace RecipeService.Models
     public class Ingredient
     {
         [Key]
-        public int Ingredient_id {get;set;}
+        public int ingredient_id {get;set;}
         public int sort_order { get; set; }
         [MaxLength(200)]
         public string name_en { get; set; }
