@@ -1,6 +1,6 @@
 import { Recipe } from "./Recipe";
 
-export class RecipeImage
+export interface RecipeImage
 {
     image_name: string;
     image_base64: string;

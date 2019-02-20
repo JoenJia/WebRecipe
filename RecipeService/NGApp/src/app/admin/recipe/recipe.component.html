@@ -1,3 +1,19 @@
-<p>
-  recipe works!
-</p>
+<div fxLayout="row" fxLayoutAlign="space-around start"
+     fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="flex-start center">
+
+  <mat-card fxFlex="0 0 calc(50% - 12px)">
+    <div class="json-schema-form">
+
+      <json-schema-form 
+      *ngIf="formActive"
+      loadExternalAssets="true"
+                        framework="material-design"
+                        [form]="jsonFormObject"
+                        [options]="jsonFormOptions"
+                        [language]="selectedLanguage"
+                        (isValid)="isValid($event)"
+                        (validationErrors)="validationErrors($event)">
+      </json-schema-form>
+    </div>
+  </mat-card>
+</div>

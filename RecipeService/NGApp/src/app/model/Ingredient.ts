@@ -1,5 +1,5 @@
 ﻿
-    export class Ingredient
+    export interface Ingredient
     {
         ingredient_id: number;
         sort_order: number;

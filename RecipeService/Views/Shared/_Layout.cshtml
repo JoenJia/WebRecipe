@@ -6,6 +6,8 @@
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     @*<link href="~/Content/assets/css/themify-icons.css" rel="stylesheet">*@
 
     @Styles.Render("~/Content/NGStyles")
@@ -13,7 +15,17 @@
 </head>
 <body>
     @RenderBody()
-    @Scripts.Render("~/bundles/Angular")
+    @*@Scripts.Render("~/bundles/Angular")*@
+    <script type="text/javascript" src="~/NGBundle/runtime.js">
+    </script>
+    <script type="text/javascript" src="~/NGBundle/polyfills.js">
+    </script>
+    <script type="text/javascript" src="~/NGBundle/styles.js">
+    </script>
+    <script type="text/javascript" src="~/NGBundle/vendor.js">
+    </script>
+    <script type="text/javascript" src="~/NGBundle/main.js">
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

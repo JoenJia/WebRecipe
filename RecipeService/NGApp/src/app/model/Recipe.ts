@@ -1,4 +1,4 @@
-export class Recipe
+export interface Recipe
 {
     recipe_id: number;
     recipe_title: string;

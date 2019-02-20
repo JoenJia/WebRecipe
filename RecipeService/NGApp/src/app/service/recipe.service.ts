@@ -4,15 +4,18 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Recipe } from '../model/Recipe';
 import { MessageService } from './message.service';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 
+    'Content-Type': 'application/json'
+ })
 };
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
-  private serviceUrl = '/API/Recipes';  // URL to web api
+  private serviceUrl = environment.apiUrl + '/Recipes';  // URL to web api
   constructor(    private http: HttpClient,
     private messageService: MessageService) { }
 
@@ -41,7 +44,7 @@ export class RecipeService {
   /** GET recipe by id. Will 404 if id not found */
   getRecipe(id: number): Observable<Recipe> {
     const url = `${this.serviceUrl}/${id}`;
-    return this.http.get<Recipe>(url).pipe(
+    return this.http.get<Recipe>(url, httpOptions).pipe(
       tap(_ => this.log(`fetched recipe id=${id}`)),
       catchError(this.handleError<Recipe>(`getRecipe id=${id}`))
     );
@@ -50,7 +53,7 @@ export class RecipeService {
   
   /* GET recipes latest updated */
   getLatest(refreshTime: Date): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(`${this.serviceUrl}/GetLatest?refreshTime=${refreshTime}`).pipe(
+    return this.http.get<Recipe[]>(`${this.serviceUrl}/GetLatest?refreshTime=${refreshTime}`, httpOptions).pipe(
       tap(_ => this.log(`get recipes updated after "${refreshTime}"`)),
       catchError(this.handleError<Recipe[]>('getLatest', []))
     );
@@ -61,7 +64,7 @@ export class RecipeService {
       // if not search term, return empty recipe array.
       return of([]);
     }
-    return this.http.get<Recipe[]>(`${this.serviceUrl}/Search?terms=${term}`).pipe(
+    return this.http.get<Recipe[]>(`${this.serviceUrl}/Search?terms=${term}`, httpOptions).pipe(
       tap(_ => this.log(`found recipes matching "${term}"`)),
       catchError(this.handleError<Recipe[]>('searchRecipes', []))
     );

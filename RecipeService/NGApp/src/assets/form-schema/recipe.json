@@ -1,0 +1,124 @@
+{
+"schema":{
+    "type":"object",
+    "title":"Recipe",
+    "properties":{
+    "recipe_id":{
+        "title": "ID",
+        "description":"Recipe Id",
+        "type":"integer",
+        "readonly":"true"
+    },
+    "recipe_title":{
+        "title": "Title",
+        "description":"Recipe Title",
+        "type":"string"
+    },
+        "recipe_description":{
+        "title": "description",
+        "description":"Recipe Description",
+        "type":"string"
+    },
+    "instruction":{
+        "title": "Instruction",
+        "description":"Recipe Instruction",
+        "type":"string"
+    },
+    "category_id":{
+        "title": "Category",
+        "description":"Category",
+        "type":"integer",
+        "enum":[32,33,34]
+    },
+    "lang_code":{
+        "title": "Language",
+        "description":"Language",
+        "type":"string",
+        "enum": [ "E", "F"]
+    },
+    "tips":{
+        "title": "Tips",
+        "description":"Recipe Tips",
+        "type":"string"
+    },
+    "benefit_text":{
+        "title": "Benefit",
+        "description":"Benefit",
+        "type":"string"
+    },
+    "makes_qty":{
+        "title": "Makes Quality",
+        "description":"Makes Quality",
+        "type":"integer"
+    },
+    "is_deleted":{
+        "title": "Marked as deleted",
+        "description":"Marked as deleted",
+        "type":"boolean"
+    },
+    "main_image":{
+        "title": "Image Name",
+        "description":"Recipe Image Name",
+        "type":"string",
+        "default":"default_recipe"
+    },
+    "last_updated":{
+        "title": "Last Updated",
+        "description":"Last Updated Date/Time",
+        "type":"string",
+        "readonly":"true"
+    }
+
+}
+    },
+    "form":[
+        {
+            "key":"recipe_id",
+            "type":"hidden"
+            },
+        {
+        "key":"recipe_title"
+        },
+        {
+            "key":"category_id",
+            "type":"select",
+            "titleMap":{
+                "32":"Vegetables and Side Dishes",
+                "33":"Soups, Salads, and Appetizers",
+                "34":"Meat and Poultry"
+            }
+        },
+        {
+            "key":"lang_code",
+            "type":"select",
+            "titleMap":{
+                "E":"English",
+                "F":"French"
+            }
+                    
+            },
+        {
+            "key":"recipe_description",
+            "type":"textarea"
+            },
+        {
+            "key":"instruction",
+            "type":"textarea"
+            },
+        {
+            "key":"tips",
+            "type":"textarea"
+            },
+        {
+            "key":"benefit_text",
+            "type":"textarea"
+            },
+        {"key":"makes_qty"},
+        {"key":"main_image"},
+        {"key":"is_deleted"},
+        {"key":"last_updated",
+        "readonly":"true"}
+        ]
+
+    
+}

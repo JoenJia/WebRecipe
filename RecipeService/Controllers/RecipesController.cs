@@ -5,9 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace RecipeService.Controllers
 {
+    [EnableCors(origins:"*", headers:"*", methods:"*")]
     public class RecipesController : ApiController
     {
         // GET api/values
@@ -47,9 +49,14 @@ namespace RecipeService.Controllers
         // POST api/values
         public void Post([FromBody] Models.Recipe recipe)
         {
+            using (var db = new Models.ModelRecipe())
+            {
+                db.Recipes.Attach(recipe);
+                db.SaveChanges();
+            }
         }
 
-        // PUT api/values/5
+            // PUT api/values/5
         public void Put(int id, [FromBody] Models.Recipe recipe)
         {
         }
