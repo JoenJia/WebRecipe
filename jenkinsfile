@@ -1,8 +1,9 @@
 pipeline {
     agent any
-
+    environment{
+       theStage="all"
+    }
     stages {
-    def theStage="all"
    stage('Get Code') {
    if (theStage in ["s1","all"]) {
       git 'https://github.com/JoenJia/WebRecipe/'}
