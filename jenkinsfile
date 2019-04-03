@@ -4,29 +4,25 @@ pipeline {
        theStage="all"
     }
     stages {
-   stage('Get Code') {
-   if (theStage in ["s1","all"]) {
-      git 'https://github.com/JoenJia/WebRecipe/'}
-   }
-   stage('NuGet')
-   {
-    if (theStage in ["s2","all"]) {
-      bat label: 'NuGet Restore', script: 'c:/tools/nuget.exe restore WebRecipe.sln'}
-   }
-   stage('NG Build') 
-   {
-    if (theStage in ["s3","all"]) {
-       bat label: 'BG Build', script: 'cd RecipeService/ngapp && npm install && C:/Users/Joen/AppData/Roaming/npm/ng build' }
-   }
-   stage('.Net Build') 
-   {
-    if (theStage in ["s4","all"]) {
-       bat "\"${tool 'MSBuild 2017'}\" WebRecipe.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}" }
-   }
-	stage('Archive')
-    {
-	 if (theStage in ["s5","all"]) {
-		archiveArtifacts 'RecipeService/bin/**'}
-    }
+      stage('Get Code') 
+      {
+         git 'https://github.com/JoenJia/WebRecipe/'
+      }
+      stage('NuGet')
+      {
+         bat label: 'NuGet Restore', script: 'c:/tools/nuget.exe restore WebRecipe.sln'
+      }
+      stage('NG Build') 
+      {
+         bat label: 'BG Build', script: 'cd RecipeService/ngapp && npm install && C:/Users/Joen/AppData/Roaming/npm/ng build' 
+      }
+      stage('.Net Build') 
+      {
+         bat "\"${tool 'MSBuild 2017'}\" WebRecipe.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}" 
+      }
+      stage('Archive')
+      {
+         archiveArtifacts 'RecipeService/bin/**'
+      }
     }
 }
