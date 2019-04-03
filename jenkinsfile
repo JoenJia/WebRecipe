@@ -6,23 +6,38 @@ pipeline {
     stages {
       stage('Get Code') 
       {
-         git 'https://github.com/JoenJia/WebRecipe/'
+         steps
+         {
+            git 'https://github.com/JoenJia/WebRecipe/'
+         }
       }
       stage('NuGet')
       {
+         steps
+         {
          bat label: 'NuGet Restore', script: 'c:/tools/nuget.exe restore WebRecipe.sln'
+         }
       }
       stage('NG Build') 
       {
+         steps
+         {
          bat label: 'BG Build', script: 'cd RecipeService/ngapp && npm install && C:/Users/Joen/AppData/Roaming/npm/ng build' 
+         }
       }
       stage('.Net Build') 
       {
+         steps
+         {
          bat "\"${tool 'MSBuild 2017'}\" WebRecipe.sln /p:Configuration=Release /p:Platform=\"Any CPU\" /p:ProductVersion=1.0.0.${env.BUILD_NUMBER}" 
+         }
       }
       stage('Archive')
       {
+         steps
+         {
          archiveArtifacts 'RecipeService/bin/**'
+         }
       }
     }
 }
