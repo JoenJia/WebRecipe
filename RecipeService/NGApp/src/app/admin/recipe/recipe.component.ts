@@ -137,8 +137,15 @@ export class RecipeComponent implements OnInit {
     this.formActive = true;
   }
 
-  onSubmit(data: any) {
+  onSubmit(data: Recipe) {
     this.submittedFormData = data;
+    if (data.recipe_id > 0){
+      this.service.updateRecipe(data);
+    }
+    else{
+      this.service.addRecipe(data);
+    }
+
   }
 
   get prettySubmittedFormData() {
