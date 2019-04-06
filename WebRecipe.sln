@@ -23,7 +23,12 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "client", "RecipeService\cli
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "6065"
+		SlnRelativePath = "RecipeService\client\"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeServiceDomain", "RecipeServiceDomain\RecipeServiceDomain.csproj", "{17422563-B6D5-481F-9DE6-77DE01622A8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeServiceTests", "RecipeServiceTests\RecipeServiceTests.csproj", "{01212F0C-AB49-45F5-A948-B66C8C132720}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +44,14 @@ Global
 		{C737ECFF-4358-4F4F-BA13-7D62CB5DC7AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C737ECFF-4358-4F4F-BA13-7D62CB5DC7AC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{C737ECFF-4358-4F4F-BA13-7D62CB5DC7AC}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{17422563-B6D5-481F-9DE6-77DE01622A8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17422563-B6D5-481F-9DE6-77DE01622A8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17422563-B6D5-481F-9DE6-77DE01622A8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17422563-B6D5-481F-9DE6-77DE01622A8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01212F0C-AB49-45F5-A948-B66C8C132720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01212F0C-AB49-45F5-A948-B66C8C132720}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01212F0C-AB49-45F5-A948-B66C8C132720}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01212F0C-AB49-45F5-A948-B66C8C132720}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

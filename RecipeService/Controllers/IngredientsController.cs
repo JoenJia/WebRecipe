@@ -5,39 +5,35 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using RecipeServiceDomain.Contexts;
+using RecipeServiceDomain.Repositories;
+using Models = RecipeServiceDomain.Contexts.Models;
 
 namespace RecipeService.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class IngredientsController : ApiController
     {
+        IContextRepositories _context;
+        public IngredientsController(IContextRepositories context)
+        {
+            _context = context;
+        }
+
         public IEnumerable<Models.Ingredient> Get()
         {
-            using (var db = new Models.ModelRecipe())
-            {
-                return db.Ingredients.ToList();
-            }
+            return _context.IngredientRepository.GetAll();
         }
         [HttpGet]
         public IEnumerable<Models.Ingredient> GetLatest(DateTime refreshTime)
         {
-            refreshTime = refreshTime.AddSeconds(1);
-            using (var db = new Models.ModelRecipe())
-            {
-                return (from r in db.Recipes
-                        join i in db.Ingredients
-                        on r.recipe_id equals i.recipe_id
-                        where r.last_updated >= refreshTime
-                        select i).ToList();
-            }
+            return _context.IngredientRepository.GetLatest(refreshTime);
         }
 
-        public IEnumerable<Models.Ingredient> Get(int id)
+        [HttpGet]
+        public IEnumerable<Models.Ingredient> GetByRecipeId(int recipeId)
         {
-            using (var db = new Models.ModelRecipe())
-            {
-                return db.Ingredients.Where(x => x.recipe_id == id).ToList();
-            }
+            return _context.IngredientRepository.GetByRecipeId(recipeId);
         }
 
         // POST api/values

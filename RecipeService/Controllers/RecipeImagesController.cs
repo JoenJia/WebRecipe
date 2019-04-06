@@ -5,26 +5,29 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using RecipeServiceDomain.Contexts;
+using RecipeServiceDomain.Repositories;
+using Models = RecipeServiceDomain.Contexts.Models;
 
 namespace RecipeService.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class RecipeImagesController : ApiController
     {
-        public IEnumerable<Models.RecipeImage> Get()
+        IContextRepositories _context;
+        public RecipeImagesController(IContextRepositories context)
         {
-            using (var db = new Models.ModelRecipe())
-            {
-                return db.RecipeImages.ToList();
-            }
+            _context = context;
         }
 
-        public Models.RecipeImage Get(string id)
+        public IEnumerable<Models.RecipeImage> Get()
         {
-            using (var db = new Models.ModelRecipe())
-            {
-                return db.RecipeImages.Where(x => x.image_name == id).FirstOrDefault();
-            }
+            return _context.RecipeImageRepository.GetAll();
+        }
+
+        public Models.RecipeImage Get(string name)
+        {
+            return _context.RecipeImageRepository.Find(name);
         }
 
         // POST api/values

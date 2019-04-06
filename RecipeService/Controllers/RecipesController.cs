@@ -6,105 +6,68 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using RecipeServiceDomain.Contexts;
+using RecipeServiceDomain.Repositories;
+using Models = RecipeServiceDomain.Contexts.Models;
 
 namespace RecipeService.Controllers
 {
     [EnableCors(origins:"*", headers:"*", methods:"*")]
     public class RecipesController : ApiController
     {
+        IContextRepositories _context;
+        public RecipesController(IContextRepositories context)
+        {
+            _context = context;
+        }
         // GET api/values
         public IEnumerable<Models.Recipe> Get()
         {
-            using (var db = new Models.ModelRecipe())
-            {
-                return db.Recipes.ToList();
-            }
+            return _context.RecipeRepository.GetAll();
         }
         [HttpGet]
         public IEnumerable<Models.Recipe> GetLatest(DateTime refreshTime)
         {
-            refreshTime = refreshTime.AddSeconds(1);
-            using (var db = new Models.ModelRecipe())
-            {
-                return db.Recipes.Where(x => x.last_updated >= refreshTime).ToList();
-            }
+            return _context.RecipeRepository.GetLatest(refreshTime);
         }
         [HttpGet]
         public IEnumerable<Models.Recipe> Search(string terms)
         {
-            using (var db = new Models.ModelRecipe())
-            {
-                return db.Recipes.Where(x => x.recipe_title.Contains(terms)).ToList();
-            }
+            return _context.RecipeRepository.Search(terms);
         }
 
         public Models.Recipe Get(int id)
         {
-            using (var db = new Models.ModelRecipe())
-            {
-                return db.Recipes.Where(x => x.recipe_id == id).FirstOrDefault();
-            }
+            return _context.RecipeRepository.Find(id);
         }
 
         // POST api/values
         public void Post([FromBody] Models.Recipe recipe)
         {
-            using (var db = new Models.ModelRecipe())
-            {
-                db.Recipes.Attach(recipe);
-                db.SaveChanges();
-            }
+            _context.RecipeRepository.Create(recipe);
         }
 
             // PUT api/values/5
         public void Put(int id, [FromBody] Models.Recipe recipe)
         {
+            _context.RecipeRepository.Update(id, recipe);
         }
 
         // DELETE api/values/5
         public int Delete(int id)
         {
-            using (var db = new Models.ModelRecipe())
-            {
-                var r = db.Recipes.Where(x => x.recipe_id == id).FirstOrDefault();
-                if (r != null)
-                {
-                    r.is_deleted = true;
-                    db.SaveChanges();
-                    return 1;
-                }
-            }
-            return 0;
+            return _context.RecipeRepository.Delete(id);
         }
 
         [HttpPost]
         public void AddExtraTestRecipes()
         {
-            using (var db = new Models.ModelRecipe())
-            {
-                if (db.Recipes.Any(x => x.recipe_id > 920))
-                {
-                    var sql = "update recipe set is_deleted = 0, last_update=getdate() where recipe_id > 920";
-                    db.Database.ExecuteSqlCommand(sql);
-                }
-                else
-                {
-                    var sqlFile = HttpContext.Current.Server.MapPath("~/App_Data/TestRecipe2.sql");
-                    db.Database.ExecuteSqlCommand(System.IO.File.ReadAllText(sqlFile));
-                    sqlFile = HttpContext.Current.Server.MapPath("~/App_Data/TestRecipeIngredient2.sql");
-                    db.Database.ExecuteSqlCommand(System.IO.File.ReadAllText(sqlFile));
-                }
-            }
+            _context.RecipeRepository.AddExtraTestRecipes();
         }
         [HttpPost]
         public void DeleteExtraTestRecipes()
         {
-            using (var db = new Models.ModelRecipe())
-            {
-                var sql = "update recipe set is_deleted = 1, last_updated = getdate() where recipe_id > 920";
-                db.Database.ExecuteSqlCommand(sql);
-            }
-
+            _context.RecipeRepository.DeleteExtraTestRecipes();
         }
     }
 }

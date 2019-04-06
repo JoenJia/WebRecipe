@@ -5,27 +5,30 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using RecipeServiceDomain.Contexts;
+using RecipeServiceDomain.Repositories;
+using Models = RecipeServiceDomain.Contexts.Models;
 
 namespace RecipeService.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CategoriesController : ApiController
     {
+        IContextRepositories _context;
+        public CategoriesController(IContextRepositories context)
+        {
+            _context = context;
+        }
+
         // GET api/values
         public IEnumerable<Models.Category> Get()
         {
-            using (var db = new Models.ModelRecipe())
-            {
-                return db.Categories.Where(x => x.category_name != string.Empty).ToList();
-            }
+            return _context.CategoryRepository.GetAll();
         }
 
         public Models.Category Get(int id)
         {
-            using (var db = new Models.ModelRecipe())
-            {
-                return db.Categories.Where(x => x.category_id == id).FirstOrDefault();
-            }
+            return _context.CategoryRepository.Find(id);
         }
 
     }
