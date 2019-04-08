@@ -1,6 +1,0 @@
-D:\test\WebRecipe\RecipeServiceDomain\bin\Debug\netstandard2.0\RecipeServiceDomain.deps.json
-D:\test\WebRecipe\RecipeServiceDomain\bin\Debug\netstandard2.0\RecipeServiceDomain.dll
-D:\test\WebRecipe\RecipeServiceDomain\obj\Debug\netstandard2.0\RecipeServiceDomain.csprojAssemblyReference.cache
-D:\test\WebRecipe\RecipeServiceDomain\obj\Debug\netstandard2.0\RecipeServiceDomain.csproj.CoreCompileInputs.cache
-D:\test\WebRecipe\RecipeServiceDomain\obj\Debug\netstandard2.0\RecipeServiceDomain.AssemblyInfoInputs.cache
-D:\test\WebRecipe\RecipeServiceDomain\obj\Debug\netstandard2.0\RecipeServiceDomain.AssemblyInfo.cs

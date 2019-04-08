@@ -1,3 +1,7 @@
 /RecipeService/obj
 /RecipeService/bin
+/RecipeServiceDomain/obj
+/RecipeServiceDomain/bin
+/RecipeServiceTests/obj
+/RecipeServiceTests/bin
 /.vs
