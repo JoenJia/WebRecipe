@@ -36,7 +36,7 @@ pipeline {
       {
          steps
          {
-         bat label: "Nuit Test", script: '"C:/Program Files (x86)/NUnit.org/nunit-console/nunit3-console.exe" RecipeServiceTests/bin/Debug/RecipeServiceTests.dll'
+         bat label: "Nuit Test", script: '"C:/Program Files (x86)/NUnit.org/nunit-console/nunit3-console.exe" RecipeServiceTests/bin/Release/RecipeServiceTests.dll'
          }
       }
       stage('Archive')
