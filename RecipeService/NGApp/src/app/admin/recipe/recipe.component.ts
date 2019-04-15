@@ -35,7 +35,7 @@ export class RecipeComponent implements OnInit {
   }
   loadCategories(): void {
     this.categoryService.getCategories()
-      .subscribe(cats => {this.categories = cats; this.loadForm();});
+      .subscribe(cats => {this.categories = cats;});
   }
   loadRecipe(): void {
     const id = +this.route.snapshot.paramMap.get('id');
